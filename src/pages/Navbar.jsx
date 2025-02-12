@@ -5,7 +5,7 @@ import { AuthContexts } from "../authProvider/AuthProvider";
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContexts);
   const location = useLocation();
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("cupcake");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,13 +23,17 @@ const Navbar = () => {
   };
 
   const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
+    const newTheme = theme === "cupcake" ? "dark" : "cupcake";
     setTheme(newTheme);
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 bg-primary shadow-lg">
-      <div className="navbar bg-base-100 rounded-lg text-white px-4 py-2">
+    <div className="fixed top-0 left-0 w-full z-50 bg-primary">
+      <div
+        className={`navbar bg-base-100 rounded-lg px-4 py-2 ${
+          theme === "cupcake" ? "text-black" : "text-white"
+        }`}
+      >
         <div className="navbar-start">
           <div className="dropdown">
             <button tabIndex={0} className="btn btn-ghost btn-circle md:hidden">
@@ -164,8 +168,12 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end flex items-center gap-4">
-          <button onClick={toggleTheme} className="btn btn-sm btn-outline">
-            {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+          <button
+            onClick={toggleTheme}
+            className="btn btn-sm btn-outline"
+            style={{ color: theme === "cupcake" ? "black" : "white" }}
+          >
+            {theme === "cupcake" ? "🌙 Dark" : "☀️ Light"}
           </button>
 
           {!user ? (
